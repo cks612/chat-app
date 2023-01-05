@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import queryString from "query-string";
+import { useLocation } from "react-router-dom";
 import io from "socket.io-client";
-import "./Chat.scss";
 import InfoBar from "../InfoBar";
 import Messages from "../Messages";
 import Input from "../Input";
 import TextContainer from "../TextContainer";
-import { useLocation } from "react-router-dom";
+import "./Chat.scss";
 
 const ENDPOINT = "http://localhost:4000";
 let socket;
@@ -41,7 +40,7 @@ const Chat = () => {
   useEffect(() => {
     //로딩 될때만 실행
     socket.on("message", (message) => {
-      setMessage((message) => [...messages, message]);
+      setMessages((message) => [...messages, message]);
     });
     socket.on("roomData", ({ users }) => {
       setUsers(users);
@@ -50,6 +49,7 @@ const Chat = () => {
 
   const sendMessage = (event) => {
     event.preventDefault();
+
     if (message) {
       socket.emit("sendMessage", message, () => setMessage(""));
     }

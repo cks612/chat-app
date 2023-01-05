@@ -1,7 +1,22 @@
 import React from "react";
+import "./InfoBar.css";
 
-const InfoBar = () => {
-  return <div></div>;
+const InfoBar = ({ room }) => {
+  <div className="infoBar">
+    <div className="leftInnerContainer">
+      <img
+        className="onlineIcon"
+        src="/images/onlineIcon.png"
+        alt="online icon"
+      />
+      <h3>{room}</h3>
+    </div>
+    <div className="rightInnerContainer">
+      <a href="/">
+        <img src="/images/closeIcon.png" alt="close icon" />
+      </a>
+    </div>
+  </div>;
 };
 
 export default InfoBar;
