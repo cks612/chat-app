@@ -6,20 +6,28 @@ import InfoBar from "../InfoBar";
 import Messages from "../Messages";
 import Input from "../Input";
 import TextContainer from "../TextContainer";
+import { useLocation } from "react-router-dom";
 
 const ENDPOINT = "http://localhost:4000";
 let socket;
 
-const Chat = ({ location }) => {
+const Chat = () => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const location = useLocation();
+
+  console.log(location);
+
   useEffect(() => {
-    const { name, room } = queryString.parse(location.search);
-    socket = io(ENDPOINT);
+    const searchParam = new URLSearchParams(location.search);
+    const name = searchParam.get("name");
+    const room = searchParam.get("room");
+
+    socket = io(ENDPOINT, { transports: ["websocket"] });
 
     setRoom(room);
     setName(name);
@@ -28,7 +36,7 @@ const Chat = ({ location }) => {
         alert(error);
       }
     });
-  }, [ENDPOINT, location.search]);
+  }, [ENDPOINT, location]);
 
   useEffect(() => {
     //로딩 될때만 실행
