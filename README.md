@@ -1,6 +1,6 @@
 # **Chat App**
 
-### React와 Next로 채팅앱을 공부하고 이해ㅑ하기
+### React와 Next로 채팅앱을 구현하면서 공부하기
 
 <br/>
 
