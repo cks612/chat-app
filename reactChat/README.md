@@ -1,7 +1,5 @@
 # **React Socket Chat App**
 
-![Yarn Version][yarn-image]
-![Next Version][next-image]
 ![React Version][react-image]
 [![Build Status][travis-image]][travis-url]
 
