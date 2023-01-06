@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import io from "socket.io-client";
 import InfoBar from "../InfoBar";
-import Messages from "../Messages";
 import Input from "../Input";
+import Messages from "../Messages";
 import TextContainer from "../TextContainer";
 import "./Chat.scss";
 
@@ -18,8 +18,6 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   const location = useLocation();
-
-  console.log(location);
 
   useEffect(() => {
     const searchParam = new URLSearchParams(location.search);
@@ -40,7 +38,7 @@ const Chat = () => {
   useEffect(() => {
     //로딩 될때만 실행
     socket.on("message", (message) => {
-      setMessages((message) => [...messages, message]);
+      setMessages((messages) => [...messages, message]);
     });
     socket.on("roomData", ({ users }) => {
       setUsers(users);
@@ -54,6 +52,7 @@ const Chat = () => {
       socket.emit("sendMessage", message, () => setMessage(""));
     }
   };
+
   return (
     <div className="outerContainer">
       <div className="container">
